@@ -1,12 +1,24 @@
-meme_dict = {
-            "CRINGE": "Algo excepcionalmente raro o embarazoso",
-            "LOL": "Una respuesta común a algo gracioso",
-            }
+import discord
+from discord.ext import commands
 
+intents = discord.Intents.default()
+intents.message_content = True
 
-word = input("Escribe una palabra que no entiendas (¡con mayúsculas!): ")
+bot = commands.Bot(command_prefix='/', intents=intents)
 
-if word in meme_dict.keys():
-    print(meme_dict[word])
-else:
-    print("esa palabra aun no ha sido definida")
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hola, soy un bot {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def kodland(ctx):
+    for i in range(4):
+        await ctx.send("Hola chicos de los lunes de python Pro")
